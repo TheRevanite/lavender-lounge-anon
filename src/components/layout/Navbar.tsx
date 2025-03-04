@@ -26,20 +26,20 @@ const Navbar = () => {
           </Button>
         </div>
         
-        <Button variant="outline" size="icon" className="rounded-full bg-accent/10">
+        <Button variant="outline" size="icon" className="rounded-full bg-secondary/30 border-primary/30 text-primary">
           <Sun className="h-5 w-5" />
         </Button>
       </div>
       
       <div className="border-t border-border py-2 px-4">
         <div className="container mx-auto flex items-center space-x-8">
-          <Button variant="ghost" className="text-muted-foreground hover:text-foreground" asChild>
+          <Button variant="ghost" className="text-muted-foreground hover:text-primary" asChild>
             <Link to="/faq" className="flex items-center gap-2">
               <span className="rounded-full h-6 w-6 flex items-center justify-center border border-muted-foreground/30">?</span>
               FAQ
             </Link>
           </Button>
-          <Button variant="ghost" className="text-muted-foreground hover:text-foreground" asChild>
+          <Button variant="ghost" className="text-muted-foreground hover:text-primary" asChild>
             <Link to="/terms" className="flex items-center gap-2">
               <span className="rounded-full h-6 w-6 flex items-center justify-center border border-muted-foreground/30">📄</span>
               Terms & Conditions
