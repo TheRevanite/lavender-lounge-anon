@@ -7,7 +7,7 @@ const Navbar = () => {
   const { currentUser, logout, isAuthenticated } = useAuth();
 
   return (
-    <nav className="sticky top-0 z-10 bg-white border-b border-purple-100 shadow-sm">
+    <nav className="sticky top-0 z-10 bg-background border-b border-border shadow-sm">
       <div className="container flex items-center justify-between h-16 px-4 mx-auto">
         <div className="flex items-center space-x-2">
           <Button variant="ghost" asChild>
@@ -18,14 +18,14 @@ const Navbar = () => {
           </Button>
         </div>
         
-        <Link to="/" className="text-2xl font-bold text-purple-600">
+        <Link to="/" className="text-2xl font-bold text-primary">
           SecureChat
         </Link>
         
         <div className="flex items-center space-x-2">
           {currentUser ? (
             <>
-              <span className="mr-2 text-sm text-purple-600">
+              <span className="mr-2 text-sm text-primary">
                 Hello, {currentUser.username}
               </span>
               <Button variant="outline" onClick={() => logout()}>
