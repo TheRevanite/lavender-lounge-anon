@@ -37,8 +37,8 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen px-4 py-12 bg-background">
-      <Card className="w-full max-w-md border-muted bg-card">
+    <div className="flex items-center justify-center min-h-screen px-4 py-12 bg-background bg-gradient-to-br from-background to-background/80">
+      <Card className="w-full max-w-md border-muted bg-card/50 backdrop-blur-sm">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold text-center text-primary">
             Welcome Back
@@ -60,7 +60,7 @@ const LoginPage = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="bg-muted border-input"
+                className="bg-card border-input"
               />
             </div>
             
@@ -82,7 +82,7 @@ const LoginPage = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="bg-muted border-input"
+                className="bg-card border-input"
               />
             </div>
           </CardContent>

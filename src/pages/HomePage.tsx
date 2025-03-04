@@ -1,17 +1,17 @@
 
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Search, Users, Plus, ArrowRight } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
 import { useChat } from "@/contexts/ChatContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { ChatRoom } from "@/types";
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const { rooms, createRoom, joinRoom } = useChat();
+  const { rooms, createRoom, joinRoom, totalOnline, registeredOnline } = useChat();
   const { currentUser, joinAnonymously } = useAuth();
   
   const [createOpen, setCreateOpen] = useState(false);
@@ -22,7 +22,6 @@ const HomePage = () => {
   const [joinAccessCode, setJoinAccessCode] = useState("");
   const [selectedRoom, setSelectedRoom] = useState<ChatRoom | null>(null);
   const [username, setUsername] = useState("");
-  const [searchTerm, setSearchTerm] = useState("");
 
   const handleCreateRoom = async () => {
     if (!roomName) return;
@@ -58,118 +57,68 @@ const HomePage = () => {
     }
   };
 
-  // Filter rooms based on search term
-  const filteredRooms = rooms.filter(room => 
-    room.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  // Mock recent chats for the design
-  const recentChats = [
-    { id: "1", name: "Alice Smith", message: "Let's discuss the project tomorrow", time: "10:30 AM", avatar: "A" },
-    { id: "2", name: "Team Encryption", message: "Bob: The new security features are ready", time: "Yesterday", avatar: "T" },
-    { id: "3", name: "Charlie Brown", message: "Thanks for the update!", time: "Yesterday", avatar: "C" },
-  ];
-
-  // Mock friends for the design
-  const friends = [
-    { id: "1", name: "Alice Smith", status: "Online" },
-    { id: "2", name: "Bob Johnson", status: "Last seen 2h ago" },
-    { id: "3", name: "Charlie Brown", status: "Online" },
-    { id: "4", name: "David Wilson", status: "Last seen 1d ago" },
-  ];
-
   return (
-    <div className="flex min-h-screen bg-background">
-      {/* Left Sidebar - Recent Chats */}
-      <div className="w-[360px] border-r border-border p-4 flex flex-col h-[calc(100vh-112px)]">
-        <div className="mb-4">
-          <h2 className="font-semibold text-lg mb-2">Recent Chats</h2>
-          <div className="flex gap-2 mb-4">
-            <Button className="flex items-center gap-2" size="sm" onClick={() => setCreateOpen(true)}>
-              <Users size={16} />
-              Create Room
-            </Button>
-            <Button className="flex items-center gap-2" size="sm" variant="outline" onClick={() => setJoinOpen(true)}>
-              <ArrowRight size={16} />
-              Join Room
-            </Button>
-            <Button className="flex items-center" size="icon" variant="outline">
-              <Plus size={16} />
-            </Button>
-          </div>
-          <div className="relative mb-4">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-            <Input
-              placeholder="Search chats..."
-              className="search-input"
-              value={searchTerm}
-              onChange={e => setSearchTerm(e.target.value)}
-            />
-          </div>
-        </div>
-        
-        <div className="space-y-2 overflow-y-auto flex-1">
-          {recentChats.map(chat => (
-            <div key={chat.id} className="p-3 hover:bg-muted rounded-lg cursor-pointer">
-              <div className="flex items-center justify-between mb-1">
-                <h3 className="font-medium">{chat.name}</h3>
-                <span className="text-xs text-muted-foreground">{chat.time}</span>
-              </div>
-              <p className="text-sm text-muted-foreground truncate">{chat.message}</p>
+    <div className="flex min-h-screen bg-purple-50">
+      {/* Left Sidebar - Recent Active Rooms */}
+      <div className="hidden w-64 p-4 bg-white border-r border-purple-100 md:block">
+        <h2 className="mb-4 text-lg font-semibold text-purple-800">Recent Active Rooms</h2>
+        <div className="space-y-3">
+          {rooms.slice(0, 8).map(room => (
+            <div 
+              key={room.id} 
+              className="p-3 transition-colors rounded-md cursor-pointer hover:bg-purple-100"
+              onClick={() => {
+                if (room.isPrivate) {
+                  setSelectedRoom(room);
+                  setJoinOpen(true);
+                } else {
+                  handleJoinRoom(room.id);
+                }
+              }}
+            >
+              <div className="font-medium text-purple-800">{room.name}</div>
+              <div className="text-xs text-purple-500">{room.usersCount} users online</div>
             </div>
           ))}
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex items-center justify-center p-8">
-        <div className="text-center max-w-2xl mx-auto">
-          <h1 className="text-5xl font-bold mb-4">
-            Secure
-            <br />
-            Messaging
-            <br />
-            <span className="text-primary">for</span>
-            <br />
-            <span className="text-primary">Everyone</span>
-          </h1>
-          
-          <p className="text-lg mb-8">
-            End-to-end encrypted chat platform that puts your privacy first. 
-            Connect securely with anyone, anywhere.
+      <div className="flex-1 px-4 py-8">
+        <div className="max-w-2xl mx-auto text-center">
+          <h1 className="text-4xl font-bold text-purple-800">Welcome to SecureChat</h1>
+          <p className="mt-4 text-lg text-purple-600">
+            Join the conversation in our encrypted anonymous chatrooms
           </p>
           
-          <div className="flex gap-4 justify-center">
-            <Button size="lg" className="px-8 py-6 bg-primary/80 hover:bg-primary">
-              Start Chatting
+          <div className="flex flex-col items-center justify-center gap-4 mt-12 md:flex-row">
+            <Button 
+              className="w-full py-8 text-lg md:w-48" 
+              onClick={() => setCreateOpen(true)}
+            >
+              Create Room
             </Button>
-            <Button size="lg" variant="outline" className="px-8 py-6">
-              Learn More
+            <Button 
+              className="w-full py-8 text-lg md:w-48" 
+              variant="outline" 
+              onClick={() => setJoinOpen(true)}
+            >
+              Join Room
             </Button>
           </div>
         </div>
       </div>
 
-      {/* Right Sidebar - Friends */}
-      <div className="w-[280px] border-l border-border p-4 hidden lg:block">
-        <h2 className="font-semibold text-lg mb-4">Friends</h2>
-        <div className="space-y-4">
-          {friends.map(friend => (
-            <div key={friend.id} className="flex items-center gap-3">
-              <div className="relative">
-                <div className="h-10 w-10 rounded-full bg-muted flex items-center justify-center">
-                  {friend.name.charAt(0)}
-                </div>
-                {friend.status === "Online" && (
-                  <div className="absolute bottom-0 right-0 online-indicator"></div>
-                )}
-              </div>
-              <div>
-                <h3 className="font-medium">{friend.name}</h3>
-                <p className="text-xs text-muted-foreground">{friend.status}</p>
-              </div>
-            </div>
-          ))}
+      {/* Right Sidebar - Online Users */}
+      <div className="hidden w-64 p-4 bg-white border-l border-purple-100 md:block">
+        <div className="mb-4">
+          <h2 className="text-lg font-semibold text-purple-800">Users Online</h2>
+          <p className="text-purple-600">{totalOnline} ({registeredOnline})</p>
+        </div>
+        <Separator className="my-4" />
+        <div className="space-y-2">
+          {/* We would iterate through actual online users here */}
+          <p className="text-sm text-purple-600">Active in multiple rooms</p>
         </div>
       </div>
 
