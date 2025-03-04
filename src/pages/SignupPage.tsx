@@ -60,10 +60,10 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen px-4 py-12 bg-gradient-to-r from-purple-100 to-purple-50">
-      <Card className="w-full max-w-md">
+    <div className="flex items-center justify-center min-h-screen px-4 py-12 bg-background bg-gradient-to-br from-background to-background/80">
+      <Card className="w-full max-w-md border-muted bg-card/50 backdrop-blur-sm">
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold text-center text-purple-800">
+          <CardTitle className="text-2xl font-bold text-center text-primary">
             Create an Account
           </CardTitle>
           <CardDescription className="text-center">
@@ -74,7 +74,7 @@ const SignupPage = () => {
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-700">
+              <label className="text-sm font-medium">
                 Username
               </label>
               <Input
@@ -82,11 +82,12 @@ const SignupPage = () => {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
+                className="bg-card border-input"
               />
             </div>
             
             <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-700">
+              <label className="text-sm font-medium">
                 Email
               </label>
               <Input
@@ -95,11 +96,12 @@ const SignupPage = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                className="bg-card border-input"
               />
             </div>
             
             <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-700">
+              <label className="text-sm font-medium">
                 Password
               </label>
               <Input
@@ -108,11 +110,12 @@ const SignupPage = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                className="bg-card border-input"
               />
             </div>
             
             <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-700">
+              <label className="text-sm font-medium">
                 Confirm Password
               </label>
               <Input
@@ -121,6 +124,7 @@ const SignupPage = () => {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
+                className="bg-card border-input"
               />
             </div>
             
@@ -132,10 +136,10 @@ const SignupPage = () => {
               />
               <label
                 htmlFor="terms"
-                className="text-sm font-medium leading-none text-gray-700 peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
               >
                 I agree to the{" "}
-                <Link to="/terms" className="text-purple-600 hover:text-purple-800">
+                <Link to="/terms" className="text-primary hover:text-primary/80">
                   terms and conditions
                 </Link>
               </label>
@@ -151,9 +155,9 @@ const SignupPage = () => {
               {isLoading ? "Creating account..." : "Create Account"}
             </Button>
             
-            <p className="mt-4 text-sm text-center text-gray-600">
+            <p className="mt-4 text-sm text-center text-muted-foreground">
               Already have an account?{" "}
-              <Link to="/login" className="text-purple-600 hover:text-purple-800">
+              <Link to="/login" className="text-primary hover:text-primary/80">
                 Sign in
               </Link>
             </p>

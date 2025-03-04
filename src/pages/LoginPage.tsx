@@ -37,10 +37,10 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen px-4 py-12 bg-gradient-to-r from-purple-100 to-purple-50">
-      <Card className="w-full max-w-md">
+    <div className="flex items-center justify-center min-h-screen px-4 py-12 bg-background bg-gradient-to-br from-background to-background/80">
+      <Card className="w-full max-w-md border-muted bg-card/50 backdrop-blur-sm">
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold text-center text-purple-800">
+          <CardTitle className="text-2xl font-bold text-center text-primary">
             Welcome Back
           </CardTitle>
           <CardDescription className="text-center">
@@ -51,7 +51,7 @@ const LoginPage = () => {
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-700">
+              <label className="text-sm font-medium">
                 Email
               </label>
               <Input
@@ -60,17 +60,18 @@ const LoginPage = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                className="bg-card border-input"
               />
             </div>
             
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <label className="text-sm font-medium text-gray-700">
+                <label className="text-sm font-medium">
                   Password
                 </label>
                 <Link 
                   to="/forgot-password" 
-                  className="text-xs text-purple-600 hover:text-purple-800"
+                  className="text-xs text-primary hover:text-primary/80"
                 >
                   Forgot password?
                 </Link>
@@ -81,6 +82,7 @@ const LoginPage = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                className="bg-card border-input"
               />
             </div>
           </CardContent>
@@ -94,9 +96,9 @@ const LoginPage = () => {
               {isLoading ? "Signing in..." : "Sign In"}
             </Button>
             
-            <p className="mt-4 text-sm text-center text-gray-600">
+            <p className="mt-4 text-sm text-center text-muted-foreground">
               Don't have an account?{" "}
-              <Link to="/signup" className="text-purple-600 hover:text-purple-800">
+              <Link to="/signup" className="text-primary hover:text-primary/80">
                 Create an account
               </Link>
             </p>

@@ -85,3 +85,17 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Dark Mode Specific Styles */
+.dark {
+  @apply bg-background text-foreground;
+}
+
+.dark .glass-effect {
+  @apply bg-white/5 backdrop-blur-lg border border-white/10;
+}
+
+.dark .card-gradient {
+  @apply bg-gradient-to-br from-card to-secondary/80 backdrop-blur-sm;
+}
+

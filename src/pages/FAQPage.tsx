@@ -65,23 +65,23 @@ const FAQPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-purple-50">
+    <div className="min-h-screen bg-background">
       <div className="max-w-4xl px-4 py-12 mx-auto">
-        <h1 className="text-3xl font-bold text-center text-purple-800">
+        <h1 className="text-3xl font-bold text-center text-primary">
           Frequently Asked Questions
         </h1>
-        <p className="mt-4 text-center text-purple-600">
+        <p className="mt-4 text-center text-primary/70">
           Find answers to common questions about SecureChat
         </p>
         
         <div className="mt-10">
-          <Accordion type="single" collapsible className="w-full bg-white rounded-lg shadow">
+          <Accordion type="single" collapsible className="w-full bg-card rounded-lg border border-muted shadow-sm">
             {faqs.map((faq, index) => (
               <AccordionItem key={index} value={`item-${index}`}>
-                <AccordionTrigger className="px-6 text-purple-800">
+                <AccordionTrigger className="px-6 text-primary">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="px-6 text-gray-700">
+                <AccordionContent className="px-6 text-foreground/80">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
@@ -89,15 +89,15 @@ const FAQPage = () => {
           </Accordion>
         </div>
         
-        <div className="p-6 mt-12 bg-white rounded-lg shadow">
-          <h2 className="text-2xl font-bold text-purple-800">Contact Us</h2>
-          <p className="mt-2 text-purple-600">
+        <div className="p-6 mt-12 bg-card rounded-lg border border-muted shadow-sm">
+          <h2 className="text-2xl font-bold text-primary">Contact Us</h2>
+          <p className="mt-2 text-primary/70">
             Have a question that's not answered above? Send us a message and we'll get back to you.
           </p>
           
           <form onSubmit={handleSubmit} className="mt-6 space-y-4">
             <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-700">
+              <label className="text-sm font-medium">
                 Your Name
               </label>
               <Input
@@ -105,11 +105,12 @@ const FAQPage = () => {
                 onChange={(e) => setName(e.target.value)}
                 placeholder="John Doe"
                 required
+                className="bg-background border-input"
               />
             </div>
             
             <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-700">
+              <label className="text-sm font-medium">
                 Your Email
               </label>
               <Input
@@ -118,11 +119,12 @@ const FAQPage = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="your.email@example.com"
                 required
+                className="bg-background border-input"
               />
             </div>
             
             <div className="space-y-2">
-              <label className="text-sm font-medium text-gray-700">
+              <label className="text-sm font-medium">
                 Your Message
               </label>
               <Textarea
@@ -131,6 +133,7 @@ const FAQPage = () => {
                 placeholder="Type your message here..."
                 rows={5}
                 required
+                className="bg-background border-input"
               />
             </div>
             
